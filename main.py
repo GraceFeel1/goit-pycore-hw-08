@@ -145,9 +145,6 @@ class AddressBook(UserDict):
         return upcoming_birthdays
 
 
-# =========================
-# SAVE / LOAD DATA
-# =========================
 
 def save_data(book, filename="addressbook.pkl"):
     with open(filename, "wb") as file:
@@ -164,9 +161,6 @@ def load_data(filename="addressbook.pkl"):
         return AddressBook()
 
 
-# =========================
-# ERROR HANDLER
-# =========================
 
 def input_error(func):
     @wraps(func)
@@ -189,9 +183,6 @@ def input_error(func):
     return inner
 
 
-# =========================
-# COMMANDS
-# =========================
 
 @input_error
 def add_contact(args, book):
@@ -286,9 +277,6 @@ def birthdays(args, book):
     return "\n".join(result)
 
 
-# =========================
-# INPUT PARSER
-# =========================
 
 def parse_input(user_input):
     parts = user_input.strip().split()
@@ -302,12 +290,9 @@ def parse_input(user_input):
     return command, args
 
 
-# =========================
-# MAIN
-# =========================
 
 def main():
-    # Завантажуємо адресну книгу при запуску
+
     book = load_data()
 
     print("Welcome to the assistant bot!")
@@ -323,7 +308,6 @@ def main():
         command, args = parse_input(user_input)
 
         if command in ["close", "exit"]:
-            # Зберігаємо адресну книгу перед виходом
             save_data(book)
 
             print("Good bye!")
